@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS test1_db;
-CREATE DATABASE test1_db;
+DROP DATABASE IF EXISTS trip_planner;
+CREATE DATABASE trip_planner;
