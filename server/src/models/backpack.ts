@@ -1,6 +1,5 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
 
-
 interface BackpackAttributes {
     id: number;
     userid: number;
