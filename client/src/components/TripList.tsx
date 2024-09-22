@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { Trail } from '../interfaces/Trip-Planner';
 import Backpack from './Backpack';
