@@ -35,48 +35,46 @@ const SignUp = () => {
   };
 
   return (
-    <div className='form-container'>
-      <form className='form sign-up-form' onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
-        {/* Username input field */}
-        <div className="form-group">
-          <label>Username</label>
-          <input 
-            className="form-input"
-            type='text'
-            name='username'
-            value={signUpData.username || ''}
-            onChange={handleChange}
-          />
+    <section className = "container-fluid">
+      <div className ="row text-center" id="title">
+        <h1 className = "col mt-5 mb-4"> Sign Up </h1>
+      </div>
+      
+      <div className ="d-flex justify-content-center mt-2" id="signUpForm">
+        <div className ="col-md-4 p-3 text-center border border-3 border-dark rounded-5">
+          <form className='form sign-up-form' onSubmit={handleSubmit}>
+              <h3 className ="mt-1">Username</h3>
+              <input 
+              className="form-input"
+              placeholder="Enter your username"
+              type='text'
+              name='username'
+              value={signUpData.username || ''}
+              onChange={handleChange}
+              />
+
+              <h3 className ="mt-1">Email</h3>
+              <input 
+                className="form-input"
+                type='text'
+                name='email'
+                value={signUpData.email || ''}
+                onChange={handleChange}
+              />
+
+              <h3 className ="mt-1">Password</h3>
+              <input 
+                className="form-input"
+                type='password'
+                name='password'
+                value={signUpData.password || ''}
+                onChange={handleChange}
+              />
+              <button className ="btn btn-primary mt-4" type="submit">Sign Up</button>
+          </form>
         </div>
-        {/* Username input field */}
-        <div className="form-group">
-          <label>Email</label>
-          <input 
-            className="form-input"
-            type='text'
-            name='email'
-            value={signUpData.email || ''}
-            onChange={handleChange}
-          />
-        </div>
-        {/* Password input field */}
-        <div className="form-group">
-          <label>Password</label>
-          <input 
-            className="form-input"
-            type='password'
-            name='password'
-            value={signUpData.password || ''}
-            onChange={handleChange}
-          />
-        </div>
-        {/* Submit button for the sign up form */}
-        <div className="form-group">
-          <button className="btn btn-primary" type='submit'>Sign Up</button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </section>
   )
 };
 

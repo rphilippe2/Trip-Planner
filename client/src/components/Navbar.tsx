@@ -35,6 +35,9 @@ const Navbar = () => {
                           <Link to='/home'>Home</Link>
                       </div>
                   </li>
+                  <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" href="./trips.html">Your Trips</a>
+                  </li>
                   <li className = "nav-item dropdown">
                       <a className = "nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                           aria-expanded="false">
@@ -85,6 +88,11 @@ const Navbar = () => {
                   </>
                 ) : (
                   // Render logout button if user is logged in
+                  <img 
+                  src="https://avatars.githubusercontent.com/u/89085111?v=4" 
+                  alt="User" 
+                  className="rounded-circle" 
+                  style={{ width: '40px', height: '40px' }}></img>
                   <button className="btn" type='button' onClick={() => {
                     auth.logout();  // Call logout() method from auth utility on button click
                   }}>Logout</button>
@@ -93,11 +101,6 @@ const Navbar = () => {
             </div>
         </div>
     </nav>
-
-
-
-
-
   )
 }
 
