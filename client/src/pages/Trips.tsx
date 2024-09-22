@@ -45,7 +45,7 @@ const Trips = () => {
             {loading ? (
                 <p>Loading trips...</p>  // Display a loading message
             ) : (
-                <TripList trips={trips} items={items}  />  // Pass fetched trips data to TripList
+                <TripList trails={trips} items={items}  />  // Pass fetched trips data to TripList
             )}
         </>
     );
