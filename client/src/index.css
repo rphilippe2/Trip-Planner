@@ -1706,3 +1706,9 @@ form [type='radio'] {
     align-content: center;
   }
 }
+
+/* custom css */
+body{
+  padding-top: 60px;
+  background-color: #24FFF9;
+}

@@ -9,7 +9,7 @@ interface ItemListProps {
     tripId: number;
 }
 
-const BackPack: React.FC<ItemListProps> = ({ items, tripId }) => {
+const Backpack: React.FC<ItemListProps> = ({ items, tripId }) => {
     const [backpackItems, setBackpackItems] = useState<Item[]>(items || []);
 
     // Function to add a new item to the backpack
@@ -45,4 +45,4 @@ const BackPack: React.FC<ItemListProps> = ({ items, tripId }) => {
     );
 };
 
-export default BackPack;
+export default Backpack;

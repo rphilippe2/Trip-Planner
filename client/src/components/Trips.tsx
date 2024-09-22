@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { Trail } from '../interfaces/Trip-Planner';
-
+import Backpack from './Backpack';
+import { Item } from '../interfaces/Item';
 
 // Define the props for the component
-interface TrailListProps {
+interface TripListProps {
     trails: Trail[] | null; // users can be an array of UserData objects or null
+    items: Item[] | null;
 }
 
 
-const TrailList: React.FC<TrailListProps> = ({ trails }) => {
+const TripList: React.FC<TripListProps> = ({ trails ,items }) => {
+    const [dbTrails, setdbTrails] = useState<Trail[]>([]);
+    
+    const removeTrail = (id: number) => {
+        if (!trails) return;
+        setdbTrails(trails.filter(trail => trail.id !== id));
+    };
+
     return (
         <>
             {trails && trails.map((trail) => (
@@ -36,10 +45,12 @@ const TrailList: React.FC<TrailListProps> = ({ trails }) => {
                                     <strong>Modified:</strong> {trail.ModifiedTime} <br />
                                 </p>
 
-                                <a href="#" className="btn btn-primary">Add To Trips</a>
-                                
-                                {/* <!-- Once added the button will turn grey and text change to added and also disabled--> */}
-                                <a href="#" className="btn btn-secondary disabled">Added</a>
+                                <a href="#collapseExample" className="btn btn-primary" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Things to Bring
+                                </a>
+                                <a href="#" className="btn btn-danger" onClick={() => removeTrail(trail.id)}>Remove Trip</a>
+
+                                <Backpack items={items? items.filter(item => item.tripId === trail.id): []} tripId={trail.id} />
                             </div>
                         </div>
                     </div>
@@ -49,4 +60,4 @@ const TrailList: React.FC<TrailListProps> = ({ trails }) => {
     );
 };
 
-export default TrailList;
+export default TripList;
