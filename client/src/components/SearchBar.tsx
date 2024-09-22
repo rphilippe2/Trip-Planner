@@ -16,41 +16,13 @@ const SearchBar = () => {
         e.preventDefault();
         try {
             //API HERE
-            console.log("Search term:", searchTerm);
-            console.log("Search option:", searchOption);
-            setTrails([ ...trails, {
-                id: 1,
-                name: "Trail Name",
-                city: "City",
-                zip: 12345,
-                crossstreets: "Cross Streets",
-                address: "Address",
-                transit: "Transit",
-                lat: 123.456,
-                lng: 123.456,
-                desc: "Description",
-                lighting: "Lighting",
-                difficulty: 1,
-                surface: "Surface",
-                parking: "Parking",
-                facilities: "Facilities",
-                hours: "Hours",
-                loopcount: "Loop Count",
-                satImgURL: "Satellite Image URL",
-                largeImgURL: "Large Image URL",
-                thumbURL: "Thumbnail URL",
-                attractions: ["Attraction 1", "Attraction 2"],
-                published: true,
-                rating: 1,
-                ratings: 1,
-                ModifiedTime: "Modified Time",
-                reviews: 1,
-                distance: 1,
-                url: "URL"
-            }]);
+            const response = await fetch(`your-api-endpoint?searchTerm=${searchTerm}&option=${searchOption}`);
+            const data = await response.json();
+    
+            setTrails(data);
             setSearch(true);
         } catch (err) {
-            console.error('Failed to search', err);  // Log any errors
+            console.error('Failed to search', err);
         }
     };
 
@@ -100,7 +72,7 @@ const SearchBar = () => {
                 </div>
             </div>
 
-            !search ? (
+            !{search} ? (
                 <>
                     <h3 className="text-center mt-5">Search for parks or trails</h3>
                 </>
