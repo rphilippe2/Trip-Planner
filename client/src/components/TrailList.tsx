@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Trail } from '../interfaces/Trip-Planner';
+import type { Trail } from '../interfaces/Trail';
 
 
 // Define the props for the component
