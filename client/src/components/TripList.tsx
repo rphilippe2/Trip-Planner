@@ -1,22 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import type { Trail } from '../interfaces/Trip-Planner';
 import Backpack from './Backpack';
 import { Item } from '../interfaces/Item';
 
-// Define the props for the component
-interface TripListProps {
-    trails: Trail[] | null; // users can be an array of UserData objects or null
-    items: Item[] | null;
-}
 
 
-const TripList: React.FC<TripListProps> = ({ trails ,items }) => {
-    const [dbTrails, setdbTrails] = useState<Trail[]>([]);
+const TripList = () => {
+    const [trails, setTrails] = useState<Trail[]>([]);
+    const [items, setItems] = useState<Item[]>([]);
     
+    useEffect(() => {
+        const fetchTrails = async () => {
+        try {
+            const response = await fetch('/api/trails');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data: Trail[] = await response.json();
+            setTrails(data);
+        } catch (error) {
+            console.error('Error fetching trails:', error);
+        }
+        };
+
+        const fetchItems = async () => {
+            try {
+                const response = await fetch('/api/items');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data: Item[] = await response.json();
+                setItems(data);
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
+
+        fetchTrails();
+        fetchItems();
+    }, []);
+
+
     const removeTrail = (id: number) => {
         if (!trails) return;
-        setdbTrails(trails.filter(trail => trail.id !== id));
+        setTrails(trails.filter(trail => trail.id !== id));
     };
 
     return (
