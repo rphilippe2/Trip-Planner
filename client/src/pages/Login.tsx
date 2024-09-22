@@ -34,37 +34,38 @@ const Login = () => {
   };
 
   return (
-    <div className='form-container'>
-      <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        {/* Username input field */}
-        <div className="form-group">
-          <label>Username</label>
-          <input 
-            className="form-input"
-            type='text'
-            name='username'
-            value={loginData.username || ''}
-            onChange={handleChange}
-          />
+    <section className = "container-fluid">
+      <div className ="row text-center" id="title">
+        <h1 className = "col mt-5 mb-4"> Sign Up </h1>
+      </div>
+
+      <div className ="d-flex justify-content-center mt-2" id="signUpForm">
+        <div className ="col-md-4 p-3 text-center border border-3 border-dark rounded-5">
+            <form onSubmit={handleSubmit}>
+                <h3 className ="mt-1">username</h3>
+                <input 
+                className = "form-input" 
+                name = 'username'
+                type = "text" 
+                placeholder = "Enter your username"
+                value={loginData.username || ''}
+                onChange={handleChange}
+                aria-label="Username" />
+
+                <h3 className ="mt-1">Password</h3>
+                <input 
+                className = "form-input" 
+                type ='password'
+                placeholder = "Enter your password" 
+                name = 'password'
+                value = {loginData.password || ''}
+                onChange = {handleChange}
+                aria-label = "Password" />
+                <button className = "btn btn-primary mt-4" type = "submit">LogIn</button>
+            </form>
         </div>
-        {/* Password input field */}
-        <div className="form-group">
-          <label>Password</label>
-          <input 
-            className="form-input"
-            type='password'
-            name='password'
-            value={loginData.password || ''}
-            onChange={handleChange}
-          />
-        </div>
-        {/* Submit button for the login form */}
-        <div className="form-group">
-          <button className="btn btn-primary" type='submit'>Login</button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </section>
   )
 };
 
