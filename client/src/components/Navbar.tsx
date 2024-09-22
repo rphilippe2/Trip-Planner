@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className = "navbar navbar-expand-lg bg-body-tertiary" id = "main-nav">
       <div className = "container-fluid">
           <div className = "navbar-brand">
-            <Link to='/home'>Trip Planner</Link>
+            <Link to=''>Trip Planner</Link>
           </div>
           <button className = "navbar-toggler" type = "button" data-bs-toggle = "collapse"
               data-bs-target = "#navbarSupportedContent" aria-expanded = "false" aria-label = "Toggle navigation">
@@ -29,11 +29,13 @@ const Navbar = () => {
               <ul className = "navbar-nav me-auto mb-2 mb-lg-0">
                   <li className = "nav-item">
                       <div className = "nav-link active" aria-current="page">
-                          <Link to='/home'>Home</Link>
+                          <Link to='/'>Home</Link>
                       </div>
                   </li>
                   <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="./trips.html">Your Trips</a>
+                        <a className="nav-link active" aria-current="page" href="./trips.html">
+                          <Link to='/trips'>Your Trips</Link>
+                        </a>
                   </li>
                   <li className = "nav-item dropdown">
                       <a className = "nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -70,8 +72,7 @@ const Navbar = () => {
                   </li>
               </ul>
               <form className = "d-flex" role="Login">
-                // Conditional rendering based on loginCheck state
-                !loginCheck ? (
+                !{loginCheck} ? (
                   <>
                     {/* Render sign up button if user is not logged in */}
                     <button className="btn" type='button'>
@@ -84,7 +85,6 @@ const Navbar = () => {
                     </button>
                   </>
                 ) : (
-                  // Render logout button if user is logged in
                   <img 
                   src="https://avatars.githubusercontent.com/u/89085111?v=4" 
                   alt="User" 

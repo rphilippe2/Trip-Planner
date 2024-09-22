@@ -7,7 +7,7 @@ const Trips = () => {
                 <div className="row text-center" id="title">
                     <h1 className = "col mt-5 mb-4"> Your Trips </h1>
                 </div>
-
+                
                 <TripList/> 
             </section>
         </>
