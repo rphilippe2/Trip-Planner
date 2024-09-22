@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 
-const Park: React.FC = () => {
   // Fetch parks based on user input
   const fetchParkByName = async (parkName: string): Promise<void> => {
     const apiKey = process.env.API_KEY_PARKS;
@@ -36,15 +34,8 @@ const Park: React.FC = () => {
     } catch (err) {
       console.log("Error from data retrieval:", err);
     }
+
   };
 
-  // Fetch parks when the component mounts
-  useEffect(() => {
-    fetchParkByName("Yellowstone");
-    fetchParkByCityName("Denver");
-  }, []);
 
-  return <div>Park Component</div>;
-};
-
-export default Park;
+export { fetchParkByName, fetchParkByCityName };
