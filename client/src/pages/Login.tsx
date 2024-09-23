@@ -42,7 +42,7 @@ const Login = () => {
       <div className ="d-flex justify-content-center mt-2" id="signUpForm">
         <div className ="col-md-4 p-3 text-center border border-3 border-dark rounded-5">
             <form onSubmit={handleSubmit}>
-                <h3 className ="mt-1">username</h3>
+                <h3 className ="mt-1">Username</h3>
                 <input 
                 className = "form-input" 
                 name = 'username'
@@ -61,7 +61,10 @@ const Login = () => {
                 value = {loginData.password || ''}
                 onChange = {handleChange}
                 aria-label = "Password" />
-                <button className = "btn btn-primary mt-4" type = "submit">LogIn</button>
+                <div>
+                  <button className = "btn btn-primary mt-4" type = "submit">LogIn</button>
+                </div>
+
             </form>
         </div>
       </div>

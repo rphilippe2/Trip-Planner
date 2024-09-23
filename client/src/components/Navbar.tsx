@@ -18,9 +18,8 @@ const Navbar = () => {
   return (
     <nav className = "navbar navbar-expand-lg bg-body-tertiary" id = "main-nav">
       <div className = "container-fluid">
-          <div className = "navbar-brand">
-            <Link to=''>Trip Planner</Link>
-          </div>
+          
+          <Link className = "navbar-brand" to=''>Trip Planner</Link>
           <button className = "navbar-toggler" type = "button" data-bs-toggle = "collapse"
               data-bs-target = "#navbarSupportedContent" aria-expanded = "false" aria-label = "Toggle navigation">
               <span className = "navbar-toggler-icon"></span>
@@ -28,14 +27,10 @@ const Navbar = () => {
           <div className = "collapse navbar-collapse" id="navbarSupportedContent">
               <ul className = "navbar-nav me-auto mb-2 mb-lg-0">
                   <li className = "nav-item">
-                      <div className = "nav-link active" aria-current="page">
-                          <Link to='/'>Home</Link>
-                      </div>
+                    <Link className = "nav-link active" aria-current="page" to='/'>Home</Link>
                   </li>
                   <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="./trips.html">
-                          <Link to='/trips'>Your Trips</Link>
-                        </a>
+                    <Link className="nav-link active" aria-current="page" to='/trips'>Your Trips</Link>
                   </li>
                   <li className = "nav-item dropdown">
                       <a className = "nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -44,9 +39,7 @@ const Navbar = () => {
                       </a>
                       <ul className = "dropdown-menu">
                           <li>
-                            <div className = "dropdown-item">
-                              <Link to='/search'>Parks/Trail</Link>
-                            </div>
+                              <Link className = "dropdown-item" to='/search'>Parks/Trail</Link>
                           </li>
                           <li>
                               <div className = "dropdown-divider"></div>
@@ -74,15 +67,8 @@ const Navbar = () => {
               <form className = "d-flex" role="Login">
                 {!loginCheck ? 
                   <>
-                    {/* Render sign up button if user is not logged in */}
-                    <button className="btn" type='button'>
-                      <Link to='/signup'>Sign Up</Link>
-                    </button>
-                    {' '}
-                    {/* Render login button if user is not logged in */}
-                    <button className="btn" type='button'>
-                      <Link to='/login'>Login</Link>
-                    </button>
+                    <Link className="btn btn-outline-success" type='button' to='/signup'>Sign Up</Link>
+                    <Link className="btn btn-outline-success" to='/login'>Login</Link>
                   </>
                   : 
                   <>
@@ -91,7 +77,7 @@ const Navbar = () => {
                   alt="User" 
                   className="rounded-circle" 
                   style={{ width: '40px', height: '40px' }}></img>
-                  <button className="btn" type='button' onClick={() => {
+                  <button className="btn btn-outline-success" type='button' onClick={() => {
                     auth.logout();  // Call logout() method from auth utility on button click
                   }}>Logout</button>
                   </>
