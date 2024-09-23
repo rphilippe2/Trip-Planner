@@ -3,26 +3,23 @@ import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
 
 const Navbar = () => {
-  // State to track the login status
   const [loginCheck, setLoginCheck] = useState(false);
 
-  // Function to check if the user is logged in using auth.loggedIn() method
   const checkLogin = () => {
     if (auth.loggedIn()) {
-      setLoginCheck(true);  // Set loginCheck to true if user is logged in
+      setLoginCheck(true); 
     }
   };
 
-  // useEffect hook to run checkLogin() on component mount and when loginCheck state changes
   useEffect(() => {
-    checkLogin();  // Call checkLogin() function to update loginCheck state
-  }, [loginCheck]);  // Dependency array ensures useEffect runs when loginCheck changes
+    checkLogin();
+  }, [loginCheck]);
 
   return (
     <nav className = "navbar navbar-expand-lg bg-body-tertiary" id = "main-nav">
       <div className = "container-fluid">
           <div className = "navbar-brand">
-            <Link to='/home'>Trip Planner</Link>
+            <Link to=''>Trip Planner</Link>
           </div>
           <button className = "navbar-toggler" type = "button" data-bs-toggle = "collapse"
               data-bs-target = "#navbarSupportedContent" aria-expanded = "false" aria-label = "Toggle navigation">
@@ -32,8 +29,13 @@ const Navbar = () => {
               <ul className = "navbar-nav me-auto mb-2 mb-lg-0">
                   <li className = "nav-item">
                       <div className = "nav-link active" aria-current="page">
-                          <Link to='/home'>Home</Link>
+                          <Link to='/'>Home</Link>
                       </div>
+                  </li>
+                  <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" href="./trips.html">
+                          <Link to='/trips'>Your Trips</Link>
+                        </a>
                   </li>
                   <li className = "nav-item dropdown">
                       <a className = "nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -70,8 +72,7 @@ const Navbar = () => {
                   </li>
               </ul>
               <form className = "d-flex" role="Login">
-                // Conditional rendering based on loginCheck state
-                !loginCheck ? (
+                !{loginCheck} ? (
                   <>
                     {/* Render sign up button if user is not logged in */}
                     <button className="btn" type='button'>
@@ -84,7 +85,11 @@ const Navbar = () => {
                     </button>
                   </>
                 ) : (
-                  // Render logout button if user is logged in
+                  <img 
+                  src="https://avatars.githubusercontent.com/u/89085111?v=4" 
+                  alt="User" 
+                  className="rounded-circle" 
+                  style={{ width: '40px', height: '40px' }}></img>
                   <button className="btn" type='button' onClick={() => {
                     auth.logout();  // Call logout() method from auth utility on button click
                   }}>Logout</button>
@@ -93,11 +98,6 @@ const Navbar = () => {
             </div>
         </div>
     </nav>
-
-
-
-
-
   )
 }
 

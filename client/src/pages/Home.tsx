@@ -1,58 +1,15 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
-import type { UserData } from "../interfaces/UserData";
-import ErrorPage from "./ErrorPage";
-import UserList from '../components/Users';
-import auth from '../utils/auth';
-
 const Home = () => {
-
-    const [users, setUsers] = useState<UserData[]>([]);
-    const [error, setError] = useState(false);
-    const [loginCheck, setLoginCheck] = useState(false);
-
-    useEffect(() => {
-        if (loginCheck) {
-            fetchUsers();
-        }
-    }, [loginCheck]);
-
-    useLayoutEffect(() => {
-        checkLogin();
-    }, []);
-
-    const checkLogin = () => {
-        if (auth.loggedIn()) {
-            setLoginCheck(true);
-        }
-    };
-
-    const fetchUsers = async () => {
-        try {
-            const data = await retrieveUsers();
-            setUsers(data)
-        } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
-            setError(true);
-        }
-    }
-
-    if (error) {
-        return <ErrorPage />;
-    }
-
     return (
         <>
-            {
-                !loginCheck ? (
-                    <div className='login-notice'>
-                        <h1>
-                            Welcome to the Trip Planner App!
-                        </h1>
-                    </div>
-                ) : (
-                    <UserList users={users} />
-                )}
+            <section className = "container-fluid">
+                <div className ="row text-center" id="title">
+                    <h1 className = "col mt-5 mb-4"> TripPlanner </h1>
+                </div>
+            
+                <div className = "row text-center" id = "infoText">
+                    <p className = "col mt-5 mb-4 mx-3 fs-4">Welcome to TripPlanner. Feel free to explore and give us your feedback.</p>
+                </div>
+            </section>
         </>
     );
 };
