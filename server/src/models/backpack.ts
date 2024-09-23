@@ -1,5 +1,4 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
-// import bcrypt from 'bcrypt';
 
 interface BackpackAttributes {
     id: number;
