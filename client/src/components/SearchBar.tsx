@@ -72,15 +72,15 @@ const SearchBar = () => {
                 </div>
             </div>
 
-            !{search} ? (
+            {!search ? 
                 <>
                     <h3 className="text-center mt-5">Search for parks or trails</h3>
                 </>
-            ) : (
+                : 
                 <>
                     <TrailList trails={trails} />
                 </>
-            )
+        }
         </>
     );
 };

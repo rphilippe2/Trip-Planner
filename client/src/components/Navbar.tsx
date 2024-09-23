@@ -72,7 +72,7 @@ const Navbar = () => {
                   </li>
               </ul>
               <form className = "d-flex" role="Login">
-                !{loginCheck} ? (
+                {!loginCheck ? 
                   <>
                     {/* Render sign up button if user is not logged in */}
                     <button className="btn" type='button'>
@@ -84,7 +84,8 @@ const Navbar = () => {
                       <Link to='/login'>Login</Link>
                     </button>
                   </>
-                ) : (
+                  : 
+                  <>
                   <img 
                   src="https://avatars.githubusercontent.com/u/89085111?v=4" 
                   alt="User" 
@@ -93,7 +94,8 @@ const Navbar = () => {
                   <button className="btn" type='button' onClick={() => {
                     auth.logout();  // Call logout() method from auth utility on button click
                   }}>Logout</button>
-                )
+                  </>
+              }
               </form>
             </div>
         </div>
