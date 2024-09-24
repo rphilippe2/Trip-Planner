@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS trip_planner;
-CREATE DATABASE trip_planner;
+DROP DATABASE IF EXISTS trip_planner_db;
+CREATE DATABASE trip_planner_db;

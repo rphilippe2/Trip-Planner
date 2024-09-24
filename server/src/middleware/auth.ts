@@ -6,6 +6,13 @@ interface JwtPayload {
   username: string;
 }
 
+// Extend the Request interface to include the user property
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: JwtPayload;
+  }
+}
+
 // Middleware function to authenticate JWT token
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   // Get the authorization header from the request
