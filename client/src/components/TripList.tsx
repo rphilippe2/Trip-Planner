@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { Trail } from '../interfaces/Trail';
-import Backpack from './backpack';
+import Backpack from './Backpack';
 import { Item } from '../interfaces/Item';
 
 
