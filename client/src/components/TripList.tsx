@@ -4,8 +4,6 @@ import type { Trail } from '../interfaces/Trail';
 import Backpack from './Backpack';
 import { Item } from '../interfaces/Item';
 
-
-
 const TripList = () => {
     const [trails, setTrails] = useState<Trail[]>([]);
     const [items, setItems] = useState<Item[]>([]);

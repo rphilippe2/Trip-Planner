@@ -1,9 +1,13 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Trail } from "../interfaces/Trail";
-import TrailList from "./TrailList"
+// import { Trail } from "../interfaces/Trail";
+// import TrailList from "./TrailList"
 import { ParkInt } from "../interfaces/ParkInt";
 import ParkList from "./ParkList";
-import { fetchParkByCityName } from "../api/parkAPI";
+import { fetchParkByCityName } from "../api/parkApi";
+// import { fetchTrailByCityName } from "../api/trailApi";
+
+
+
 const SearchBar = () => {
     const [searchOption, setSearchOption] = useState<string>('');
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -21,30 +25,45 @@ const SearchBar = () => {
             //API HERE
             if (searchOption === 'parks') {
                 const data = await fetchParkByCityName(searchTerm);
-                
+                console.log(data);
                 const newParksArray: ParkInt[] =  [];
                 let count = 0;
-                data.data.map((fetchdata: { fullname: string; url: string; description: string; states: string; designation: string; images: { url: string }[] }) => {
-                    const park: ParkInt = {
-                        id: count,
-                        name: fetchdata.fullname,
-                        url: fetchdata.url,
-                        description: fetchdata.description,
-                        states: fetchdata.states.split(',').map(state => state.trim()),
-                        designation: fetchdata.designation,
-                        images: fetchdata.images[0].url
-                    };
-                    count++;
-                    newParksArray.push(park);
-                });
+                if (data && Array.isArray(data)){
+                    data.map((fetchdata: { fullName: string; url: string; description: string; states: string; designation: string; images: { url: string }[] }) => {
+                        const park: ParkInt = {
+                            id: count,
+                            name: fetchdata.fullName,
+                            url: fetchdata.url,
+                            description: fetchdata.description,
+                            states: fetchdata.states[0],
+                            designation: fetchdata.designation,
+                            images: fetchdata.images[0].url
+                        };
+                        count++;
+                        newParksArray.push(park);
+                    });
+                }
 
                 setParks(newParksArray);
                 setSearch(true);
-            }else {
-                // const data = await fetchTrailByName(searchTerm);
-                // setTrails(data);
-                // setSearch(true);
             }
+            // else {
+            //     const data = await fetchTrailByCityName(searchTerm);
+                
+            //     const newParksArray: Trail[] =  [];
+            //     let count = 0;
+            //     data.data.map((fetchdata: {}) => {
+            //         const trail: Trail = {
+            //             id: count,
+            //             name: fetchdata.name,
+            //             city: fetchdata.city,
+            //             zip: fetchdata.zip,
+            //             address: fetchdata.address
+            //         };
+            //         count++;
+            //         newParksArray.push(park);
+            //     });
+            // }
 
             setSearch(true);
         } catch (err) {
