@@ -1,12 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Trail } from "../interfaces/Trail";
 import TrailList from "./TrailList"
-
+import { ParkInt } from "../interfaces/ParkInt";
+import ParkList from "./ParkList";
+import { fetchParkByCityName } from "../api/parkAPI";
 const SearchBar = () => {
     const [searchOption, setSearchOption] = useState<string>('');
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [search, setSearch] = useState<boolean>(false);
-    const [trails, setTrails] = useState<Trail[]>([]);
+    // const [trails, setTrails] = useState<Trail[]>([]);
+    const [parks, setParks] = useState<ParkInt[]>([]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchOption(e.target.value);
@@ -16,10 +19,33 @@ const SearchBar = () => {
         e.preventDefault();
         try {
             //API HERE
-            const response = await fetch(`your-api-endpoint?searchTerm=${searchTerm}`);
-            const data = await response.json();
+            if (searchOption === 'parks') {
+                const data = await fetchParkByCityName(searchTerm);
+                
+                const newParksArray: ParkInt[] =  [];
+                let count = 0;
+                data.data.map((fetchdata: { fullname: string; url: string; description: string; states: string; designation: string; images: { url: string }[] }) => {
+                    const park: ParkInt = {
+                        id: count,
+                        name: fetchdata.fullname,
+                        url: fetchdata.url,
+                        description: fetchdata.description,
+                        states: fetchdata.states.split(',').map(state => state.trim()),
+                        designation: fetchdata.designation,
+                        images: fetchdata.images[0].url
+                    };
+                    count++;
+                    newParksArray.push(park);
+                });
 
-            setTrails(data);
+                setParks(newParksArray);
+                setSearch(true);
+            }else {
+                // const data = await fetchTrailByName(searchTerm);
+                // setTrails(data);
+                // setSearch(true);
+            }
+
             setSearch(true);
         } catch (err) {
             console.error('Failed to search', err);
@@ -78,7 +104,9 @@ const SearchBar = () => {
                 </>
                 : 
                 <>
-                    <TrailList trails={trails} />
+                    {/* {searchOption === 'parks' ? <ParkList parks={parks} /> :
+                    <TrailList trails={trails} />} */}
+                    <ParkList parks={parks}></ParkList>
                 </>
         }
         </>

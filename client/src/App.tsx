@@ -5,12 +5,11 @@ import Navbar from './components/Navbar';
 function App() {
 
   return (
-    <div>
-      <header className = 'position-fixed top-0 start-0 w-100'>
-        <Navbar />
-      </header>
-      
-      <body>
+    <>
+        <header className = 'position-fixed top-0 start-0 w-100'>
+          <Navbar />
+        </header>
+
         <main className = "d-flex flex-column min-vh-100">
           <Outlet />
         </main>
@@ -18,9 +17,9 @@ function App() {
         <footer className = "mt-auto text-center">
           <p>&copy; TripPlanner created by AdminChatter, Phy, Moe, Ricardo</p>
         </footer>
-      </body>
+    </>
 
-    </div>
+
   )
 }
 
