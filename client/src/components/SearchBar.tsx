@@ -3,12 +3,16 @@ import { Trail } from "../interfaces/Trail";
 import TrailList from "./TrailList"
 import { ParkInt } from "../interfaces/ParkInt";
 import ParkList from "./ParkList";
-import { fetchParkByCityName } from "../api/parkAPI";
+import { fetchParkByCityName } from "../api/parkApi";
+import { fetchTrailsByCity } from "../api/trailsAPI";
+
+
+
 const SearchBar = () => {
     const [searchOption, setSearchOption] = useState<string>('');
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [search, setSearch] = useState<boolean>(false);
-    // const [trails, setTrails] = useState<Trail[]>([]);
+    const [trails, setTrails] = useState<Trail[]>([]);
     const [parks, setParks] = useState<ParkInt[]>([]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,29 +25,61 @@ const SearchBar = () => {
             //API HERE
             if (searchOption === 'parks') {
                 const data = await fetchParkByCityName(searchTerm);
-                
+                console.log(data);
                 const newParksArray: ParkInt[] =  [];
                 let count = 0;
-                data.data.map((fetchdata: { fullname: string; url: string; description: string; states: string; designation: string; images: { url: string }[] }) => {
-                    const park: ParkInt = {
-                        id: count,
-                        name: fetchdata.fullname,
-                        url: fetchdata.url,
-                        description: fetchdata.description,
-                        states: fetchdata.states.split(',').map(state => state.trim()),
-                        designation: fetchdata.designation,
-                        images: fetchdata.images[0].url
-                    };
-                    count++;
-                    newParksArray.push(park);
-                });
+                if (data && Array.isArray(data)){
+                    data.map((fetchdata: { fullName: string; url: string; description: string; states: string; designation: string; images: { url: string }[] }) => {
+                        const park: ParkInt = {
+                            id: count,
+                            name: fetchdata.fullName,
+                            url: fetchdata.url,
+                            description: fetchdata.description,
+                            states: fetchdata.states[0],
+                            designation: fetchdata.designation,
+                            images: fetchdata.images[0].url
+                        };
+                        count++;
+                        newParksArray.push(park);
+                    });
+                }
 
                 setParks(newParksArray);
                 setSearch(true);
-            }else {
-                // const data = await fetchTrailByName(searchTerm);
-                // setTrails(data);
-                // setSearch(true);
+            }
+            else {
+                const data = await fetchTrailsByCity(searchTerm);
+                
+                const newTrailsArray: Trail[] =  [];
+                let count = 0;
+                data.data.map((fetchdata: {
+                    name: string; city: string; zip: number; address: string; transit: string; desc: string; difficulty: number; surface: string; parking: string; facilities: string; hours: string; satImgURL: string; attractions: [string]; rating: number; ModifiedTime: string; distance: number;
+                })  => {
+                    const trail: Trail = {
+                        id: count,
+                        name: fetchdata.name,
+                        city: fetchdata.city,
+                        zip: fetchdata.zip,
+                        address: fetchdata.address,
+                        transit: fetchdata.transit,
+                        desc: fetchdata.desc,
+                        difficulty: fetchdata.difficulty,
+                        surface: fetchdata.surface,
+                        parking: fetchdata.parking,
+                        facilities: fetchdata.facilities,
+                        hours: fetchdata.hours,
+                        satImgURL: fetchdata.satImgURL,
+                        attractions: fetchdata.attractions,
+                        rating: fetchdata.rating,
+                        ModifiedTime: fetchdata.ModifiedTime,
+                        distance: fetchdata.distance
+                    };
+                    count++;
+                    newTrailsArray.push(trail);
+                });
+
+                setTrails(newTrailsArray);
+                setSearch(true);
             }
 
             setSearch(true);
@@ -104,9 +140,8 @@ const SearchBar = () => {
                 </>
                 : 
                 <>
-                    {/* {searchOption === 'parks' ? <ParkList parks={parks} /> :
-                    <TrailList trails={trails} />} */}
-                    <ParkList parks={parks}></ParkList>
+                    {searchOption === 'parks' ? <ParkList parks={parks} /> :
+                    <TrailList trails={trails} />}
                 </>
         }
         </>

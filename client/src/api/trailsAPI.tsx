@@ -15,7 +15,7 @@ const fetchTrailsByCity = async (city: string) => {
     }
 
     const data = await response.json();
-    return data;
+    return data.trails;
   } catch (error) {
     console.error("Error fetching trail data:", error);
   }
