@@ -56,6 +56,7 @@ const SignUp = () => {
               <h3 className ="mt-1">Email</h3>
               <input 
                 className="form-input"
+                placeholder="Enter your email"
                 type='text'
                 name='email'
                 value={signUpData.email || ''}
@@ -65,12 +66,15 @@ const SignUp = () => {
               <h3 className ="mt-1">Password</h3>
               <input 
                 className="form-input"
+                placeholder="Enter your password"
                 type='password'
                 name='password'
                 value={signUpData.password || ''}
                 onChange={handleChange}
               />
-              <button className ="btn btn-primary mt-4" type="submit">Sign Up</button>
+              <div>
+                <button className ="btn btn-primary mt-4" type="submit">Sign Up</button>
+              </div>
           </form>
         </div>
       </div>

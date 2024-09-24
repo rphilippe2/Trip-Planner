@@ -16,9 +16,9 @@ const SearchBar = () => {
         e.preventDefault();
         try {
             //API HERE
-            const response = await fetch(`your-api-endpoint?searchTerm=${searchTerm}&option=${searchOption}`);
+            const response = await fetch(`your-api-endpoint?searchTerm=${searchTerm}`);
             const data = await response.json();
-    
+
             setTrails(data);
             setSearch(true);
         } catch (err) {
