@@ -36,10 +36,12 @@ router.get('/trails/:city', async (req: Request, res: Response) => {
             
         }else{
         res.send({message: "Error fetching trails"});
+        return;
         }
     } catch (err) {
         console.error(err);
         res.json(err);
+        return;
     }
 });
 
