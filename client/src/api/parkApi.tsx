@@ -1,6 +1,5 @@
 // Fetch parks based on user input
 import { ParkInt } from "../interfaces/ParkInt";
-
 const fetchParkByName = async (parkName: string): Promise<void> => {
     const apiKey = process.env.API_KEY_PARKS;
     console.log("YOU ARE IN FETCH PARK BY NAME");
