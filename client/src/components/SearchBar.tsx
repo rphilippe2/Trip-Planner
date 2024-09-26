@@ -3,8 +3,8 @@ import { Trail } from "../interfaces/Trail";
 import TrailList from "./TrailList"
 import { ParkInt } from "../interfaces/ParkInt";
 import ParkList from "./ParkList";
-import { fetchParkByCityName } from "../api/parkAPI";
-import { fetchTrailsByCity } from "../api/trailsAPI";
+import { fetchParkByCityName } from "../api/parkAPI.js";
+import { fetchTrailsByCity } from "../api/trailsAPI.js";
 
 
 
@@ -49,34 +49,34 @@ const SearchBar = () => {
             }
             else {
                 const data = await fetchTrailsByCity(searchTerm);
-                
+                console.log(data);
                 const newTrailsArray: Trail[] =  [];
-                let count = 0;
-                data.data.map((fetchdata: {
-                    name: string; city: string; zip: number; address: string; transit: string; desc: string; difficulty: number; surface: string; parking: string; facilities: string; hours: string; satImgURL: string; attractions: [string]; rating: number; ModifiedTime: string; distance: number;
-                })  => {
-                    const trail: Trail = {
-                        id: count,
-                        name: fetchdata.name,
-                        city: fetchdata.city,
-                        zip: fetchdata.zip,
-                        address: fetchdata.address,
-                        transit: fetchdata.transit,
-                        desc: fetchdata.desc,
-                        difficulty: fetchdata.difficulty,
-                        surface: fetchdata.surface,
-                        parking: fetchdata.parking,
-                        facilities: fetchdata.facilities,
-                        hours: fetchdata.hours,
-                        satImgURL: fetchdata.satImgURL,
-                        attractions: fetchdata.attractions,
-                        rating: fetchdata.rating,
-                        ModifiedTime: fetchdata.ModifiedTime,
-                        distance: fetchdata.distance
-                    };
-                    count++;
-                    newTrailsArray.push(trail);
-                });
+                // let count = 0;
+                // data.data.map((fetchdata: {
+                //     name: string; city: string; zip: number; address: string; transit: string; desc: string; difficulty: number; surface: string; parking: string; facilities: string; hours: string; satImgURL: string; attractions: [string]; rating: number; ModifiedTime: string; distance: number;
+                // })  => {
+                //     const trail: Trail = {
+                //         id: count,
+                //         name: fetchdata.name,
+                //         city: fetchdata.city,
+                //         zip: fetchdata.zip,
+                //         address: fetchdata.address,
+                //         transit: fetchdata.transit,
+                //         desc: fetchdata.desc,
+                //         difficulty: fetchdata.difficulty,
+                //         surface: fetchdata.surface,
+                //         parking: fetchdata.parking,
+                //         facilities: fetchdata.facilities,
+                //         hours: fetchdata.hours,
+                //         satImgURL: fetchdata.satImgURL,
+                //         attractions: fetchdata.attractions,
+                //         rating: fetchdata.rating,
+                //         ModifiedTime: fetchdata.ModifiedTime,
+                //         distance: fetchdata.distance
+                //     };
+                //     count++;
+                //     newTrailsArray.push(trail);
+                // });
 
                 setTrails(newTrailsArray);
                 setSearch(true);
